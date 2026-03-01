@@ -2,9 +2,14 @@ for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
   document.querySelectorAll(".drum")[i].addEventListener("click", function () {
     var buttonInnerHTML = this.innerHTML;
     buttonPress(buttonInnerHTML);
-   
+    buttonAnimation(buttonInnerHTML);
   });
 }
+
+addEventListener("keypress", function (event) {
+  buttonPress(event.key);
+  buttonAnimation(event.key);
+});
 
 function buttonPress(key) {
   switch (key) {
@@ -42,6 +47,10 @@ function buttonPress(key) {
   }
 }
 
-addEventListener("keypress", function (event) {
-  buttonPress(event.key);
-});
+function buttonAnimation(key) {
+  var activeButton = document.querySelector("." + key);
+  activeButton.classList.add("pressed");
+  setTimeout(function () {
+    activeButton.classList.remove("pressed");
+  }, 100);
+}
